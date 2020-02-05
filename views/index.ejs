@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <meta http-equiv="X-UA-Compatible" content="ie=edge">
+       <title>Document</title>
+       
+      
+
+       <style>
+
+              * { margin: 0; padding: 0; box-sizing: border-box; }
+              body { 
+                     
+                     font: 13px Helvetica, Arial; 
+                     background-image: url(/img/run.jpg);
+                     background-color: beige;
+                     
+              
+              }
+              form { 
+              background: #fff; 
+              padding: 3px; 
+              position: fixed; 
+              bottom: 0; 
+              width: 100%; 
+              border-color: #000; 
+              border-top-style: solid; 
+              border-top-width: 1px;
+              }
+              form input { 
+              border-style: solid; 
+              border-width: 1px; padding: 10px; width: 85%; 
+              margin-right: .5%; 
+              }
+              form button { 
+              width: 9%; 
+              background: rgb(130, 224, 255); 
+              border: none; padding: 10px; 
+              margin-left: 2%; 
+              }
+              form button:hover { 
+                     background: rgb(9, 42, 73); 
+              }
+              #messages { 
+              list-style-type: none; 
+              margin: 0; 
+              padding: 0; 
+              }
+              #messages li { 
+              padding: 5px 10px; 
+              }
+              #messages li:nth-child(odd) 
+              { background: #eee; }
+              h1 {
+                     font-size:55px;
+                     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                    text-align: center;
+              }
+              .encabezado{
+                     background-color:rgb(255, 191, 128);
+                     background-image: url(img/run.jpg);
+              }
+
+              
+          </style>
+
+
+
+
+</head>
+<body>
+       
+       <div class="encabezado">
+              <h1>Welcome to the best free chat </h1> 
+              <img src=img/run.jpg>
+       </div>
+       
+       <ul id="messages">
+
+       </ul>
+       <form action="/" method="POST" id="chatForm">
+              <input type="text" autocomplete="off" autofocus="on" oninput="istyping()" placeholder="send a messege....."/>
+              <button>Enviar</button>
+       </form>
+       <script src="../../socket.io/socket.io.js"></script>
+       <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+       <script>
+              let  socket = io.connect('http:/localhost4000');
+
+//send/receive without reload
+$('form').submit( e => {
+       e.preventDefault(); // prevents page reloading
+       socket.emit('chat_messege', $('#txt').val());
+       $('#txt').val('');
+       return false;
+});
+// messeges of chat
+socket.on('chat_message', msg => {
+       $('#messages').append( $('<li>').html(msg) );
+});
+
+//welcome messege
+socket.on('is_online', username =>  {
+       $('#messages').append( $('<li>').html(username))
+});
+
+//ask for the Nmae
+
+let username = prompt('how it´s your name?');
+socket.emit('username', username);
+       </script>
+
+</body>
+</html>

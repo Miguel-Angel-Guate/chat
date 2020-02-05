@@ -1,0 +1,25 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "try to do a chat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Miguel-Angel-Guate/chat.git"
+  },
+  "keywords": [],
+  "author": "Miguel Angel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Miguel-Angel-Guate/chat/issues"
+  },
+  "homepage": "https://github.com/Miguel-Angel-Guate/chat#readme",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
+}
