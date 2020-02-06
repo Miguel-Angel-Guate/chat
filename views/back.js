@@ -1,5 +1,5 @@
 // connect to backEnd
-let  socket = io.connect('http:/localhost4000');
+let  socket = io.connect('http:/localhost: 4000');
 
 //send/receive without reload
 $('form').submit( e => {
